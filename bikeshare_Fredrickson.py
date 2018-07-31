@@ -150,10 +150,17 @@ def station_stats(df):
     print('\nCalculating Station Stats...\n')
 
     # display most commonly used start station
-
+    mode_start_dtation = df['Start Station'].mode()[0]
+    print('the most common start station is {}'.format(mode_start_station))
+    
     # display most commonly used end station
-
+    mode_end_station = df['End Station'].mode()[0]
+    print('the most common end station is {}'.format(mode_end_station))
+    
     # display most frequent combination of start station and end station trip
+    df['Start End'] = df['Start Staton'] + ',' + df['End Station']
+    mode_start_end[] = df['Start End'].mode()[0].split(',')
+    print('the most common start and end station combination is {} and {}'.format(mode_start_end[0], mode_start_end[1])
 
     return
 
@@ -165,8 +172,16 @@ def trip_duration_stats(df):
     print('\nCalculating Duration Stats...\n')
 
     # display total travel time
-
+    total_time = df['Trip Duration'].sum()
+    hours, rem = divmod(total_time, 3600)
+    minutes, seconds = divmod(rem, 60)
+    print('The total travel time was {:02.0f}:{:02.0f}:{:05.2f}'.format(hours, minutes, seconds))
+    
     # display mean travel time
+    mean_time = df['Trip Duration'].mean()
+    hours, rem = divmod(mean_time, 3600)
+    minutes, seconds = divmod(rem, 60)
+    print('The mean travel time was {:02.0f}:{:02.0f}:{:05.2f}'.format(hours, minutes, seconds))
 
     return
 
@@ -178,10 +193,22 @@ def user_stats(df):
     print('\nCalculating User Stats...\n')
 
     # Display counts of user types
-
+    if 'User Types' in df.columns:
+        value_counts = df['User Types'].value_counts()
+        print('The user counts are as follows:')
+        print(value_counts)
+          
     # Display counts of gender
+    if 'Gender' in df.columns:
+        value_counts = df['Gender'].value_counts()
+        print('The user counts are as follows:')
+        print(value_counts)
 
     # Display earliest, most recent, and most common year of birth
+    df.dropna(subset=['Birth Year'], inplace=True)
+    print('The earliest birth year was {.0f}'.format(df['Birth Year'].min())
+    print('The most recent birth year was {.0f}'.format(df['Birth Year'].max())
+    print('The most common birth year was {.0f}'.format(df['Birth Year'].mode()[0])
 
 
 def main():
