@@ -103,10 +103,11 @@ def load_data(city, month, day):
     print('\nLoading Data...\n')
 
     path = os.getcwd().replace('\\', '/') + '/'
+    dir_path = os.path.dirname(os.path.realpath(__file__)).replace('\\', '/') + '/'
     try:
-        df = pd.read_csv(path + CITY_DATA.get(city))
+        df = pd.read_csv(dir_path + CITY_DATA.get(city))
     except FileNotFoundError as e:
-        sys.exit('Error loading file. Make sure that the datafiles are in the working directory.')
+        sys.exit('Error loading file. Make sure that the datafiles are in the working directory.\npath: {}\ndir_path: {}'.format(path, dir_path))
 
     # convert the Start Time column to datetime
     df['Start Time'] = pd.to_datetime(df['Start Time'])
@@ -217,15 +218,37 @@ def user_stats(df):
         print('The most common birth year was {:.0f}'.format(df['Birth Year'].mode()[0]))
 
 
+def displaydf(df):
+    # variable to track position in df
+    i = 0
+    while True:
+        num = input('How many lines would you like to print out? To proceed, type 0 or none.').lower()
+        
+        # Break condition
+        if num == '0' or num == 'none':
+            break
+        else:
+            try:
+                num = int(num)
+                print(df[i:i+num].to_string() + '\n')
+                i += num
+            except Exception as e:
+                print('Invalid input. Try again')
+        
+    return
+
+
 def main():
     while True:
         city, month, day = get_filters()
         df = load_data(city, month, day)
-
+        
         df = time_stats(df, month, day)
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
+
+        displaydf(df)
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
