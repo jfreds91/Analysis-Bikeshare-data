@@ -6,34 +6,30 @@
 
 ## Purpose
 The purpose of this project was to read in data from 3 data sources on bikeshare services; data from Washington, Chicago, and NYC. 'bikeshare_Fredrickson.py' is meant to be run on the command line, and takes string input from the user.
+### Concepts
+This project explores basic pandas and numpy usage. It also employs a wrapper function to report the amount of time it took to run any subfunction
 
 ## User Input
-**Enter Desired City**
+**Enter Desired City:**
 Enter washington, chicago, or new york city
 
-
-**Enter Desired Month**
+**Enter Desired Month:**
 Enter month filter for data. Available months span January through June.
 
-
-**Enter Desired Day**
+**Enter Desired Day:**
 Enter day filter day of week filter for data.
-
 
 ## Output
 >All stats include the time it took to calculate them
 
-**Time Stats**
+**Time Stats:**
 Reports, pre-day and month filtering, the most popular month, DoW, and hour for the data.
 
-
-**Station Stats**
+**Station Stats:**
 Reports, post filtering, most popular start, end, and combined start-end stations.
 
-
-**Duration Stats**
+**Duration Stats:**
 Reports, post filtering, total travel time and mean travel time per trip
 
-
-**User Stats**
+**User Stats:**
 Reports, post filtering, basic stats on how many users were recorded, their genders, and their birthyears.
